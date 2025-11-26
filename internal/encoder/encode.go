@@ -36,10 +36,3 @@ func Encode(data *spec.DataInput) ([]byte, error) {
 	}
 	return buf, nil
 }
-
-func appendI32(buf []byte, n spec.I32) []byte {
-	return append(
-		buf,
-		byte(n>>24), byte(n>>16), byte(n>>8), byte(n),
-	)
-}
