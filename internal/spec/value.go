@@ -1,4 +1,4 @@
-package pkg
+package spec
 
 type Value interface {
 	isValue()
