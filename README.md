@@ -1,1 +1,1 @@
-# .hdata serialization format
+# `.hdata` serialization format
