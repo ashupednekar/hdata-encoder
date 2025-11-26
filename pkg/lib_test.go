@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/ashupednekar/hdata-encoder/internal/spec"
-	//"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestEncodeDecode(t *testing.T) {
@@ -22,6 +22,10 @@ func TestEncodeDecode(t *testing.T) {
 		t.Errorf("error encoding data: %s", err)
 	}
 	fmt.Printf("encoded: %v", s)
-	//decoded := serde.Decode(s)
-	//assert.Equal(t, data, decoded, "decoded data should match original data")
+	decoded, err := serde.Decode(s)
+	fmt.Printf("decoded: %v", decoded)
+  if err != nil {
+		t.Errorf("error decoding data: %s", err)
+	}
+	assert.Equal(t, data, decoded, "decoded data should match original data")
 }

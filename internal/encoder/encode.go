@@ -8,14 +8,14 @@ import (
 
 func Encode(data *spec.DataInput) ([]byte, error) {
 	buf := make([]byte, 0, 5)
-	buf = append(buf, byte(spec.I32Tag))
+	buf = append(buf, byte(spec.ItemTag))
 	buf = appendI32(buf, spec.I32(len(*data)))
 	for _, value := range *data {
 		switch v := value.(type) {
 		case spec.Str:
 			s := string(v)
 			strBuf := make([]byte, 0, 1+4*len(s))
-			strBuf = append(strBuf, byte(spec.I32Tag))
+			strBuf = append(strBuf, byte(spec.StrTag))
 			strBuf = appendI32(strBuf, spec.I32(len(s)))
 			strBuf = append(strBuf, s...)
 			buf = append(buf, strBuf...)
@@ -36,3 +36,6 @@ func Encode(data *spec.DataInput) ([]byte, error) {
 	}
 	return buf, nil
 }
+
+
+//TODO: implement EncodeWithOffset for concurrent decoding

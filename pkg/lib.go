@@ -3,6 +3,7 @@ package pkg
 import (
 	"encoding/base64"
 
+	"github.com/ashupednekar/hdata-encoder/internal/decoder"
 	"github.com/ashupednekar/hdata-encoder/internal/encoder"
 	"github.com/ashupednekar/hdata-encoder/internal/spec"
 )
@@ -11,9 +12,9 @@ type DataInput = spec.DataInput
 
 type Serde interface {
 	Encode(toSend DataInput) ([]byte, error)
-	Decode(received []byte) DataInput
+	Decode(received []byte) (DataInput, error)
   EncodeB64(toSend DataInput) (string, error)
-	DecodeB64(received string) DataInput
+	DecodeB64(received string) (DataInput, error) 
 
 }
 
@@ -32,10 +33,10 @@ func (h *HDataSerde) EncodeB64(toSend DataInput) (string, error){
 
 }
  
-func (h *HDataSerde) Decode(received []byte) DataInput {
-	return DataInput{}
+func (h *HDataSerde) Decode(received []byte) (DataInput, error) {
+	return decoder.Decode(received)
 }
 
-func (h *HDataSerde) DecodeB64(received string) DataInput {
-	return DataInput{}
+func (h *HDataSerde) DecodeB64(received string) (DataInput, error) {
+	return DataInput{}, nil
 }
