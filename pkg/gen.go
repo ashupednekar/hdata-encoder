@@ -5,7 +5,7 @@ import (
 	"math/rand"
 )
 
-func randomData(n int, maxStr int) DataInput {
+func RandomData(n int, maxStr int) DataInput {
 	if n <= 0 {
 		n = 1
 	}
@@ -22,8 +22,11 @@ func randomData(n int, maxStr int) DataInput {
 		case 1:
 			out = append(out, spec.I32(int32(rand.Intn(10_000))))
 		case 2:
-			size := rand.Intn(count)
-			out = append(out, randomData(size, maxStr))
+			// minN := int(float64(n) * 0.6) // 80% of n
+			// maxN := n
+			// size := rand.Intn(maxN-minN+1) + minN
+			size := rand.Intn(n)
+			out = append(out, RandomData(size, maxStr))
 		}
 	}
 
