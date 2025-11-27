@@ -56,15 +56,14 @@ Decode → identical structure
 ### Time
 
 Encoding:  
-O(N + total_string_bytes)  
+```O(N + total_string_bytes)```
 Single linear traversal.
 
 Decoding:  
-O(N + total_string_bytes)  
+```O(N + total_string_bytes)```
 Sequential scan. No seeking or backtracking.
 
 ### Space
-
 - Output ≈ input size + small per-element overhead  
 - Decoder allocates only what’s required  
 - No extra buffers beyond what’s needed
@@ -80,15 +79,37 @@ Sequential decoding stays optimal and simple.
 
 ## How to run
 
-Encode:
-go run ./cmd/hdata-encoder encode input.json > out.bin
-
-Decode:
-go run ./cmd/hdata-encoder decode out.bin > out.json
-
-Tests:
+Run individual test
+```shell
 go test ./...
+```
 
+Or run the cli command
+
+```shell
+❯ go run main.go bench -n 10000 -s 100 -i 10
+Generating data (n=10000, maxStr=100)...
+Generating data (n=10000, maxStr=100)...
+Generating data (n=10000, maxStr=100)...
+Generating data (n=10000, maxStr=100)...
+Generating data (n=10000, maxStr=100)...
+Generating data (n=10000, maxStr=100)...
+Generating data (n=10000, maxStr=100)...
+Generating data (n=10000, maxStr=100)...
+Generating data (n=10000, maxStr=100)...
+Generating data (n=10000, maxStr=100)...
+
+[0] encode=165ms size=13.32MB decode=27ms
+[1] encode=0ms size=0.00MB decode=0ms
+[2] encode=151ms size=8.11MB decode=34ms
+[3] encode=868ms size=106.24MB decode=230ms
+[4] encode=40ms size=3.03MB decode=5ms
+[5] encode=2485ms size=358.34MB decode=593ms
+[6] encode=351ms size=46.93MB decode=80ms
+[7] encode=141ms size=8.27MB decode=26ms
+[8] encode=0ms size=0.00MB decode=0ms
+[9] encode=242ms size=28.63MB decode=64ms
+```
 ---
 
 ## Extending the format (adding more types)
